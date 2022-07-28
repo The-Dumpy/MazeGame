@@ -10,9 +10,9 @@ class Level
 	int m_height;
 	int m_width;
 
-	std::vector<PlacableActor*> m_pActors;
 
 public:
+	std::vector<PlacableActor*> m_pActors;
 	Level();
 	~Level();
 

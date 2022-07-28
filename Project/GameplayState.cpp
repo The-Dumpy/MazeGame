@@ -156,7 +156,13 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			assert(collidedBomb);
 			collidedBomb->Remove();
 			m_player.SetPosition(newPlayerX, newPlayerY);
+			for (auto actor = m_pLevel->m_pActors.begin(); actor != m_pLevel->m_pActors.end(); ++actor)
+			{
+				if ((*actor)->GetType() == ActorType::Enemy)
+					(*actor)->Remove();
+			}
 			break;
+			
 		}
 		case ActorType::Enemy:
 		{
