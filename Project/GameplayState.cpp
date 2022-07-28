@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <assert.h>
 
+#include "Bomb.h"
 #include "Enemy.h"
 #include "Key.h"
 #include "Door.h"
@@ -30,7 +31,7 @@ GameplayState::GameplayState(StateMachineExampleGame* pOwner)
 	, m_currentLevel(0)
 	, m_pLevel(nullptr)
 {
-	m_LevelNames.push_back("Level1.txt");
+	m_LevelNames.push_back("LevelTest.txt");
 	m_LevelNames.push_back("Level2.txt");
 	m_LevelNames.push_back("Level3.txt");
 }
@@ -149,6 +150,14 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 	{
 		switch (collidedActor->GetType())
 		{
+		case ActorType::Bomb:
+		{
+			Bomb* collidedBomb = dynamic_cast<Bomb*>(collidedActor);
+			assert(collidedBomb);
+			collidedBomb->Remove();
+			m_player.SetPosition(newPlayerX, newPlayerY);
+			break;
+		}
 		case ActorType::Enemy:
 		{
 			Enemy* collidedEnemy = dynamic_cast<Enemy*>(collidedActor);

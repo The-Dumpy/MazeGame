@@ -14,6 +14,7 @@ enum class ActorColor
 
 enum class ActorType
 {
+	Bomb,
 	Door,
 	Enemy,
 	Goal,
